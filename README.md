@@ -22,7 +22,7 @@
 
 ## Setup
 
-1. Clone the repository: `git clone --recursive git@github.com:thomasweng15/ngdf.git`
+1. Clone the repository: `git clone --recursive git@github.com:facebookresearch/NGDF.git`
 2. Create a conda environment and install package dependencies
 
     ```
