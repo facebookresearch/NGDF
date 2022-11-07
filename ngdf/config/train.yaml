@@ -1,0 +1,64 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+###
+# Overwrite these configs here or in the command
+###
+data_root: /path/to/ngdf/data
+project_root: /path/to/ngdf
+experiment_yml: path/to/ngdf/ngdf/config/experiments/perobj_Bottle.yaml
+wdb_project: null
+wdb_entity: null
+
+###
+# Default method-specific configs, some overridden by experiment_yml
+###
+experiment: dbg
+epochs: 20
+n_grasp_data: -1 # -1 means use all data
+n_pc_data_per_obj: -1 # -1 means use all data
+grasps_val_ratio: 0.05
+pc_val_ratio: 0.2
+dist_func: cp
+augment: rot # [off, rot] random rotations
+aug_ratio: 0.7
+pc_data_path: null # ${data_root}/acronym_perobj/shape-dataset
+obj_classes: []
+net:
+  wandb: False
+  data_path: null # ${data_root}/acronym_perobj/grasp-dataset
+  batch_size: 32
+  lr: 0.0001
+  dims: [512, 512, 512, 512, 512, 512, 512, 512]
+  dropout: null
+  dropout_prob: 0.0
+  weight_norm: True
+  norm_layers: [1, 2, 3, 4, 5, 6, 7, 8]
+  xyz_in_all: null
+  input_in: []
+  max_test_samples: 30
+  max_test_iter: 3000
+  latent:
+    run_path: ${project_root}/ndf_robot/src/ndf_robot/model_weights/multi_category_weights.pth
+    size: 768 # 256 x 3
+    dropout: False
+
+###
+# Other default configs (not method-specific)
+###
+hydra:
+  run:
+    dir: ${data_root}/runs/outputs/${experiment}/${now:%Y-%m-%d_%H%M%S}
+gpu: [0]
+seed: 0
+workers: 4
+csv_logs: csv
+tb_logs: tb
+val_check_interval: 1.0 
+progress_bar_refresh_rate: 0
+load_path: null
+log_every_n_steps: 5
+num_sanity_val_steps: 1
+every_n_epochs: 1

@@ -1,0 +1,13 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+sweep:
+  dir: ${data_root}/multirun/${experiment}
+  subdir: out${net.out_type}-${net.latent.type}-aug${augment}
+launcher: 
+  timeout_min: 1440
+  gpus_per_node: 1
+  cpus_per_task: 8
+  mem_gb: 16

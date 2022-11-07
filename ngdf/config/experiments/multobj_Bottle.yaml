@@ -1,0 +1,13 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+experiment: multobj_Bottle
+augment: rot
+pc_data_path: ${data_root}/acronym_multobj/shape-dataset
+obj_classes: ["Bottle_4b5f54fc4e629371cf078dc7b29022e6_0.007920563190269918","Bottle_5e896bc124bc0af9fd590443d27a974e_0.029326527953703774","Bottle_6b810dbc89542fd8a531220b48579115_0.02731985561793818","Bottle_10d3d5961e00b2133ff038bc77759685_0.015613054513295678","Bottle_3108a736282eec1bc58e834f0b160845_0.01685461529193486","Bottle_c5eb3234b73037562825656dc457df78_0.008788526522791613","Bottle_d851cbc873de1c4d3b6eb309177a6753_0.0020595984445177487"]
+val_check_interval: 50000
+net:
+  data_path: ${data_root}/acronym_multobj/grasp-dataset
+  batch_size: 20

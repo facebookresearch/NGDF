@@ -1,0 +1,12 @@
+# Copyright (c) Meta Platforms, Inc. and affiliates.
+
+# This source code is licensed under the MIT license found in the
+# LICENSE file in the root directory of this source tree.
+
+experiment: perobj_Bowl
+augment: rot
+pc_data_path: ${data_root}/acronym_perobj/shape-dataset
+obj_classes: ["Bowl"]
+net:
+  data_path: ${data_root}/acronym_perobj/grasp-dataset
+  batch_size: 20
