@@ -11,7 +11,7 @@
 
 <h4 align="center">
   <a href="https://sites.google.com/view/neural-grasp-distance-fields"><b>Website</b></a> &nbsp;•&nbsp;
-  <a href=""><b>Paper</b></a> 
+  <a href="https://arxiv.org/abs/2211.02647"><b>Paper</b></a> 
 </h4>
 
 <div align="center">
@@ -140,14 +140,16 @@ NGDF
     bash scripts/train/multobj_Bottle.sh
     ```
 
-<!-- ## Bibtex
+## Bibtex
 
+```
 @article{weng2022ngdf,
   title={Neural Grasp Distance Fields for Robot Manipulation,
   author={Weng, Thomas and Held, David and Meier, Franziska and Mukadam, Mustafa},
-  journal={arXiv preprint arXiv:TODO},
+  journal={arXiv preprint arXiv:2211.02647},
   year={2022}
-} -->
+}
+```
 
 ## License
 
