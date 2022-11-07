@@ -11,7 +11,7 @@
 
 <h4 align="center">
   <a href="https://sites.google.com/view/neural-grasp-distance-fields"><b>Website</b></a> &nbsp;•&nbsp;
-  <a href=""><b>Paper</b></a> 
+  <a href="https://arxiv.org/abs/2211.02647"><b>Paper</b></a> 
 </h4>
 
 <div align="center">
