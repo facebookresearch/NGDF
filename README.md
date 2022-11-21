@@ -115,6 +115,7 @@ NGDF
         cd contact_graspnet
         conda env update -f contact_graspnet_env_tf25.yml
         sh compile_pointnet_tfops.sh
+        pip install -e .
         ```
         Download trained model `scene_test_2048_bs3_hor_sigma_001` from [here](https://drive.google.com/drive/folders/1tBHKf60K8DLM5arm-Chyf7jxkzOr5zGl?usp=sharing) and copy it into the `checkpoints/` folder.
 
