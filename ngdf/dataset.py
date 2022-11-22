@@ -39,7 +39,6 @@ class GraspDataset(Dataset):
         )
         self.model.eval()
 
-        self.dset_pc = h5py.File(f"{self.cfg.pc_data_path}/dataset.hdf5", "r")
         self.pc_dict = pc_dict
         for obj in self.objects:
             mesh, mesh_mctr_T = load_mesh(
@@ -81,6 +80,8 @@ class GraspDataset(Dataset):
         p_mctr2grasp_T = mctr2grasp_T @ T_rotgrasp2grasp
 
         # get point cloud
+        if not hasattr(self, "dset_pc"):
+            self.dset_pc = h5py.File(f"{self.cfg.pc_data_path}/dataset.hdf5", "r")
         rnd_idx = random.choice(self.pc_dict[obj])
         sample = self.dset_pc[obj][rnd_idx]
 
@@ -143,7 +144,9 @@ class PointCloudDataset(Dataset):
 
         self.dset_pc = h5py.File(f"{self.cfg.pc_data_path}/dataset.hdf5", "r")
         self.objects = [
-            x for x in list(self.dset_pc.keys()) if x in self.cfg.obj_classes
+            x
+            for x in list(self.dset_pc.keys())
+            if x.split("_")[0] in self.cfg.obj_classes
         ]
 
     def get_dicts(self):
