@@ -76,6 +76,7 @@ NGDF
 
 2. Run evaluation
     * Download pre-trained models and configs into `data/models` from this [link](https://drive.google.com/drive/folders/1d4DjHp-YYIZMtESbLb9zYZavxQ14ny-2?usp=sharing)
+    * Download object rotations into `data` from this [link](https://drive.google.com/file/d/1wC_dCpVYy3mVQmpFzcyPARWdDoUmsuHU/view?usp=share_link)
     * Run grasp level set evaluations: 
     ```
     bash scripts/eval/grasp_level_set/perobj.sh
