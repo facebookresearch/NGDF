@@ -70,9 +70,9 @@ NGDF
 
 ## Grasp Level Set Optimization Evaluation
 
-1. Download dataset from this [Google Drive link](https://drive.google.com/drive/folders/1QPyhemprl0iybUjwFCkZpTBVM8lhma13?usp=sharing). 
+1. Download datasets `acronym_perobj` and `acronym_multobj` from [this Google Drive link](https://drive.google.com/drive/folders/1h88_hjP5v6cGyEOpK-g2J24FMeXKn99P?usp=share_link). Place the datasets in `data/`.
 
-    The dataset is required to get the closest grasp metric. 
+    The datasets are required to compute the closest grasp metric. 
 
 2. Run evaluation
     * Download pre-trained models and configs into `data/models` from this [link](https://drive.google.com/drive/folders/1d4DjHp-YYIZMtESbLb9zYZavxQ14ny-2?usp=sharing)
