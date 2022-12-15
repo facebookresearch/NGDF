@@ -161,6 +161,12 @@ RUN sudo apt update && \
 ARG SSH_PRIVATE_KEY
 ARG SSH_PUBLIC_KEY
 
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O $HOME/miniconda.sh && \
+    bash $HOME/miniconda.sh -b -p $HOME/miniconda && \
+    rm -rf miniconda.sh
+
+ENV PATH $HOME/miniconda/bin:$PATH
+
 #
 # WHATCH OUT! DO READ THIS! SERIOUS SECURITY BREACH CAN HAPPEN OTHERWISE !
 #
@@ -171,7 +177,8 @@ ARG SSH_PUBLIC_KEY
 # does contain your **GIT PRIVATE KEYS** that can be used by anybody else and compromise you.
 # Be careful !
 #
-RUN mkdir -p /home/ros/.ssh && \
+RUN conda init && \
+    mkdir -p /home/ros/.ssh && \
     chmod 0700 /home/ros/.ssh && \
     ssh-keyscan github.com > /home/ros/.ssh/known_hosts && \
     echo "${SSH_PRIVATE_KEY}" > /home/ros/.ssh/id_rsa && \
