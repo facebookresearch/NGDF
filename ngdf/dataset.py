@@ -15,6 +15,7 @@ from omegaconf import OmegaConf
 from pytransform3d import rotations as pr
 from pytransform3d import transformations as pt
 from torch.utils.data import DataLoader, Dataset, random_split
+from pathlib import Path
 
 from ngdf.utils import load_mesh
 
@@ -138,16 +139,12 @@ class PointCloudDataset(Dataset):
     so each can be assigned to train val grasp dataset
     """
 
-    def __init__(self, config):
+    def __init__(self, config, objects):
         self.cfg = config
         self.data_path = config.net.data_path
 
         self.dset_pc = h5py.File(f"{self.cfg.pc_data_path}/dataset.hdf5", "r")
-        self.objects = [
-            x
-            for x in list(self.dset_pc.keys())
-            if x.split("_")[0] in self.cfg.obj_classes
-        ]
+        self.objects = objects
 
     def get_dicts(self):
         train_pc_dict = {}
@@ -170,6 +167,19 @@ class GraspDataModule(pl.LightningDataModule):
         super().__init__()
         self.cfg = cfg
 
+    def get_objects(self, dset_grasp):
+        # Get object ids that appear in the grasps/ folder
+        grasps_h5_dir = Path(self.cfg.net.data_path) / ".." / "grasps"
+        h5_obj_ids = [x.with_suffix("").name for x in grasps_h5_dir.iterdir()]
+
+        # Only keep objects that are in obj_classes and in the grasps/ folder
+        objects = [
+            x
+            for x in list(dset_grasp.keys())
+            if x.split("_")[0] in self.cfg.obj_classes and x in h5_obj_ids
+        ]
+        return objects
+
     def collect_grasps(self, dset_grasp, objects, test=False):
         """Get tuples of object i, grasp type, and query index.
         Ground truth is the same as the query index for the given grasp type"""
@@ -189,14 +199,10 @@ class GraspDataModule(pl.LightningDataModule):
         return ids
 
     def setup(self, stage=None):
-        # get ids of train/val split
+        # Load dataset.hdf5 containing grasp distances
         dset_grasp = h5py.File(f"{self.cfg.net.data_path}/dataset.hdf5", "r")
-        objects = [
-            x
-            for x in list(dset_grasp.keys())
-            if x.split("_")[0] in self.cfg.obj_classes
-        ]
 
+        objects = self.get_objects(dset_grasp)
         ids = self.collect_grasps(dset_grasp, objects)
         random.shuffle(ids)
 
@@ -207,7 +213,7 @@ class GraspDataModule(pl.LightningDataModule):
         n_train = len(ids) - n_val
         train_ids, val_ids = random_split(ids, [n_train, n_val])
 
-        pc_dset = PointCloudDataset(self.cfg)
+        pc_dset = PointCloudDataset(self.cfg, objects)
         train_pc_dict, val_pc_dict = pc_dset.get_dicts()
         self.grasps_train = GraspDataset(
             self.cfg,
@@ -226,12 +232,12 @@ class GraspDataModule(pl.LightningDataModule):
         print(
             f"Val: {len(self.grasps_val)} Batches: {len(self.grasps_val) / self.cfg.net.batch_size}"
         )
-        self.setup_test()
 
     def setup_test(self):
+        # Load dataset.hdf5 containing grasp distances
         dset_grasp = h5py.File(f"{self.cfg.net.data_path}/dataset.hdf5", "r")
-        objects = [x for x in list(dset_grasp.keys()) if x in self.cfg.obj_classes]
 
+        objects = self.get_objects(dset_grasp)
         test_ids = self.collect_grasps(dset_grasp, objects, test=True)
         test_ids = test_ids[: self.cfg.net.max_test_samples]
         pc_dset = PointCloudDataset(self.cfg)
