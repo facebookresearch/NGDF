@@ -10,6 +10,7 @@ PROJECT_ROOT=$SCRIPT_DIR/../..
 DATA_ROOT=$SCRIPT_DIR/../../data
 
 python ngdf/train.py \
+    experiment=perobj_Bowl \
     experiment_yml=$SCRIPT_DIR/../../ngdf/config/experiments/perobj_Bowl.yaml \
     data_root=$DATA_ROOT \
     project_root=$PROJECT_ROOT
