@@ -21,4 +21,4 @@ python ngdf/evaluate.py \
     --ckpt_path=data/models/Bottle_intracategory_partial/default_default_train-graspfields/0_0_248dyj7f/checkpoints/epoch=0-step=199999.ckpt \
     --data_path=data/acronym_multobj/grasp-dataset \
     --pc_data_path=data/acronym_multobj/shape-dataset \
-    --eval_objs=Bottle_244894af3ba967ccd957eaf7f4edb205_0.012953570261294404
+    --eval_objs=Bottle
