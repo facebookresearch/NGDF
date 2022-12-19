@@ -10,6 +10,7 @@ PROJECT_ROOT=$SCRIPT_DIR/../..
 DATA_ROOT=$SCRIPT_DIR/../../data
 
 python ngdf/train.py \
+    experiment=multobj_Bottle \
     experiment_yml=$SCRIPT_DIR/../../ngdf/config/experiments/multobj_Bottle.yaml \
     data_root=$DATA_ROOT \
     project_root=$PROJECT_ROOT
