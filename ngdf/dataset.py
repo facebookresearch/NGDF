@@ -240,7 +240,7 @@ class GraspDataModule(pl.LightningDataModule):
         objects = self.get_objects(dset_grasp)
         test_ids = self.collect_grasps(dset_grasp, objects, test=True)
         test_ids = test_ids[: self.cfg.net.max_test_samples]
-        pc_dset = PointCloudDataset(self.cfg)
+        pc_dset = PointCloudDataset(self.cfg, objects)
         _, val_pc_dict = pc_dset.get_dicts()
         self.grasps_test = GraspDataset(
             self.cfg, dset_grasp, objects, test_ids, val_pc_dict
