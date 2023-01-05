@@ -12,6 +12,7 @@ do
     esac
 done
 
+# Evaluate on held-out test Bottle
 echo "Evaluating Bottle..."
 python ngdf/evaluate.py \
     $pb_arg \
@@ -19,6 +20,6 @@ python ngdf/evaluate.py \
     --max_iter=3000 \
     --save_images \
     --ckpt_path=data/models/Bottle_intracategory_partial/default_default_train-graspfields/0_0_248dyj7f/checkpoints/epoch=0-step=199999.ckpt \
-    --data_path=data/acronym_multobj/grasp-dataset \
-    --pc_data_path=data/acronym_multobj/shape-dataset \
+    --data_path=data/acronym_perobj/grasp-dataset \
+    --pc_data_path=data/acronym_perobj/shape-dataset \
     --eval_objs=Bottle
