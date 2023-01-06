@@ -54,6 +54,10 @@
         cd acronym && pip install -e .
         ```
 
+## Docker Setup
+
+Refer to [docker documenation](./docker/README.md) for details.
+
 ## Folder structure
 ```bash
 NGDF
