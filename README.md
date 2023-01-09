@@ -26,9 +26,10 @@
 2. Create a conda environment and install package dependencies
 
     ```
+    cd NGDF
     conda env create -f ngdf_env.yml
     conda activate ngdf
-    cd ngdf && pip install -e .
+    pip install -e .
     ```
     Install [PyTorch](https://pytorch.org/get-started/locally/) separately, based on your CUDA driver version. The command below was tested on a 3080/3090 with CUDA 11.1:
     ```
@@ -48,7 +49,11 @@
         touch ./etc/conda/activate.d/ndf_env.sh
         echo "cd /PATH/TO/ndf_robot && source ndf_env.sh && cd -" >> ./etc/conda/activate.d/ndf_env.sh
         ```
-        Download pre-trained `ndf_robot` weights: `ndf_robot/scripts/download_demo_weights.sh`
+        Download pre-trained `ndf_robot` weights: 
+        ```
+        cd NGDF/ndf_robot
+        bash ndf_robot/scripts/download_demo_weights.sh
+        ```
     * acronym
         ```
         cd acronym && pip install -e .
