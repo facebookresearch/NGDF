@@ -9,3 +9,11 @@ repos:
         stages: [commit]
         language: system
         entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
+    -   id: black
+        name: black
+        files: \.py$
+        stages: [commit]
+        exclude: ^(acronym|contact_graspnet|differentiable-robot-model|ndf_robot|OMG-Planner|scripts|theseus)
+        language: python
+        language_version: python3.7
+        entry: black
