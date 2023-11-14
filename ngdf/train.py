@@ -29,7 +29,7 @@ def init_model(cfg):
     return model
 
 
-@hydra.main(config_path="config", config_name="train")
+@hydra.main(version_base="1.1", config_path="config", config_name="train")
 def main(cfg):
     if cfg.experiment_yml is not None:
         exp_cfg = OmegaConf.load(cfg.experiment_yml)

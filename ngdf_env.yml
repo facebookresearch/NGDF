@@ -33,4 +33,4 @@ dependencies:
     - tabulate==0.9.0
     - torchmetrics==0.7.0
     - trimesh==3.13.5
-    - wandb==0.16.0
+    - wandb==0.13.1
