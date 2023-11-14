@@ -133,7 +133,7 @@ NGDF
 
 ```
 @article{weng2022ngdf,
-  title={Neural Grasp Distance Fields for Robot Manipulation,
+  title={Neural Grasp Distance Fields for Robot Manipulation},
   author={Weng, Thomas and Held, David and Meier, Franziska and Mukadam, Mustafa},
   journal={IEEE International Conference on Robotics and Automation (ICRA)},
   year={2023}
