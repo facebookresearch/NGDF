@@ -23,41 +23,18 @@
 ## Setup
 
 1. Clone the repository: `git clone --recursive git@github.com:facebookresearch/NGDF.git`
-2. Create a conda environment and install package dependencies
+2. Create a conda environment and install package dependencies. Note: [mamba](https://mamba-framework.readthedocs.io/en/latest/) is highly recommended as a drop-in replacement for conda.
 
     ```
     cd NGDF
-    conda env create -f ngdf_env.yml
-    conda activate ngdf
-    pip install -e .
+    bash install.sh
     ```
     Install [PyTorch](https://pytorch.org/get-started/locally/) separately, based on your CUDA driver version. The command below was tested on a 3080/3090 with CUDA 11.1:
     ```
+    source prepare.sh
     pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
     ```
-3. Setup submodules
-
-    * ndf_robot
-        ```
-        cd ndf_robot && pip install -e .
-        ```
-        Source ndf_robot whenever the conda env is activated
-        ```
-        conda activate ngdf
-        cd $CONDA_PREFIX
-        mkdir -p ./etc/conda/activate.d
-        touch ./etc/conda/activate.d/ndf_env.sh
-        echo "cd /PATH/TO/ndf_robot && source ndf_env.sh && cd -" >> ./etc/conda/activate.d/ndf_env.sh
-        ```
-        Download pre-trained `ndf_robot` weights: 
-        ```
-        cd NGDF/ndf_robot
-        bash ndf_robot/scripts/download_demo_weights.sh
-        ```
-    * acronym
-        ```
-        cd acronym && pip install -e .
-        ```
+    Run `source prepare.sh` before running any `ngdf` training or evaluation code to activate the environment and set env variables. 
 
 ## Folder structure
 ```bash
@@ -77,7 +54,7 @@ NGDF
 
 1. Download datasets `acronym_perobj` and `acronym_multobj` from [this Google Drive link](https://drive.google.com/drive/folders/1h88_hjP5v6cGyEOpK-g2J24FMeXKn99P?usp=share_link). Place the datasets in `data/`.
 
-    The datasets are required to compute the closest grasp metric. 
+    The datasets are required to compute the closest grasp metric and are also used in training. 
 
 2. Run evaluation
     * Download pre-trained models and configs into `data/models` from this [link](https://drive.google.com/drive/folders/1d4DjHp-YYIZMtESbLb9zYZavxQ14ny-2?usp=sharing)
@@ -108,12 +85,6 @@ NGDF
         git remote add parent https://github.com/facebookresearch/differentiable-robot-model.git
         git fetch parent
         python setup.py develop
-        ```
-
-    * theseus-ai
-        ```
-        cd theseus
-        pip install -e .
         ```
 
     * Contact-GraspNet
@@ -147,14 +118,25 @@ NGDF
     bash scripts/train/multobj_Bottle.sh
     ```
 
+### Docker instructions
+* Building docker
+    ```
+    cd NGDF
+    docker build -t ngdf . 
+    ```
+* Run docker
+    * `bash docker_run.sh`
+    * `source prepare.sh`
+    * Run the same commands for training in the container under `root:/workspace/NGDF#`
+
 ## Bibtex
 
 ```
 @article{weng2022ngdf,
-  title={Neural Grasp Distance Fields for Robot Manipulation,
+  title={Neural Grasp Distance Fields for Robot Manipulation},
   author={Weng, Thomas and Held, David and Meier, Franziska and Mukadam, Mustafa},
-  journal={arXiv preprint arXiv:2211.02647},
-  year={2022}
+  journal={IEEE International Conference on Robotics and Automation (ICRA)},
+  year={2023}
 }
 ```
 
