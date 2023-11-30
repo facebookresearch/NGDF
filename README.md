@@ -36,6 +36,10 @@
     ```
     Run `source prepare.sh` before running any `ngdf` training or evaluation code to activate the environment and set env variables. 
 
+## Docker Setup
+
+Refer to [docker documenation](./docker/README.md) for details.
+
 ## Folder structure
 ```bash
 NGDF
